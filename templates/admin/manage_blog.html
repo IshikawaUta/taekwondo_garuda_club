@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Kelola Blog{% endblock %}
+
+{% block content %}
+    <h1 class="uk-text-center">Kelola Blog</h1>
+
+    <div class="uk-card uk-card-default uk-card-body uk-margin-medium">
+        <h3 class="uk-card-title">Tambah Postingan Blog Baru</h3>
+        <form action="{{ url_for('admin_blog') }}" method="post" enctype="multipart/form-data">
+            <div class="uk-margin">
+                <input class="uk-input" type="text" name="title" placeholder="Judul Postingan" required>
+            </div>
+            <div class="uk-margin">
+                <textarea class="uk-textarea" name="content" rows="10" placeholder="Isi Postingan" required></textarea>
+            </div>
+            <div class="uk-margin" uk-form-custom="target: true">
+                <input type="file" name="image" required>
+                <input class="uk-input uk-form-width-medium" type="text" placeholder="Pilih Gambar Blog" disabled>
+            </div>
+            <div class="uk-margin">
+                <button class="uk-button uk-button-primary" type="submit">Tambah Blog</button>
+            </div>
+        </form>
+    </div>
+
+    <hr class="uk-divider-small">
+
+    <h3 class="uk-margin-top">Daftar Postingan Blog</h3>
+    <table class="uk-table uk-table-striped uk-table-hover uk-table-middle">
+        <thead>
+            <tr>
+                <th>Judul</th>
+                <th>Tanggal</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.title }}</td>
+                <td>{{ post.date_posted.strftime('%d %B %Y') }}</td>
+                <td>
+                    <a href="#" class="uk-button uk-button-small uk-button-default">Edit</a>
+                    <form action="{{ url_for('admin_delete_blog_post', post_id=post._id) }}" method="post" class="uk-display-inline">
+                        <button type="submit" class="uk-button uk-button-small uk-button-danger">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

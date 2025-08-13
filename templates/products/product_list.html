@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Produk - Taekwondo Garuda Club{% endblock %}
+
+{% block content %}
+    <h1 class="uk-text-center">Semua Produk</h1>
+    <div class="uk-child-width-1-2 uk-child-width-1-4@s uk-grid-match" uk-grid>
+        {% for product in products %}
+        <div class="product-card">
+            <div class="uk-card uk-card-default uk-card-hover uk-card-body uk-text-center">
+                <a href="{{ url_for('product_detail', product_id=product._id) }}">
+                    <img src="{{ product.get('image_url', url_for('static', filename='images/placeholder.jpg')) }}" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
+                    <h3 class="uk-card-title uk-margin-top">{{ product.name }}</h3>
+                    <p>Rp{{ product.price | format_rupiah }}</p>
+                </a>
+                <form action="{{ url_for('add_to_cart', product_id=product._id) }}" method="post" class="uk-margin-top">
+                    <button type="submit" class="uk-button uk-button-primary">Beli Sekarang</button>
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <div class="uk-width-1-1">
+            <div class="uk-alert-warning" uk-alert>
+                <p>Produk tidak ditemukan.</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

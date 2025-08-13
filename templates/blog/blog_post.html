@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} - Taekwondo Garuda Club{% endblock %}
+
+{% block content %}
+    <div class="uk-container">
+        <h1 class="uk-text-center">{{ post.title }}</h1>
+        <p class="uk-text-meta uk-text-center">Ditulis oleh {{ post.author }} pada {{ post.date_posted.strftime('%d %B %Y') }}</p>
+        
+        {% if post.image_url %}
+        <div class="uk-text-center uk-margin">
+            <img src="{{ post.image_url }}" alt="{{ post.title }}" class="uk-border-rounded">
+        </div>
+        {% endif %}
+        
+        <div class="uk-article-body">
+            {{ post.content | safe }}
+        </div>
+
+        <a href="{{ url_for('blog') }}" class="uk-button uk-button-default uk-margin-top">Kembali ke Blog</a>
+    </div>
+{% endblock %}

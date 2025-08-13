@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Tentang Kami - Taekwondo Garuda Club{% endblock %}
+
+{% block content %}
+    <h1 class="uk-text-center">Tentang Kami</h1>
+    <div class="uk-grid-medium" uk-grid>
+        <div class="uk-width-1-2@m">
+            <img src="{{ url_for('static', filename='images/about.jpg') }}" alt="Tentang Garuda Taekwondo Club" style="border-radius: 100%;">
+        </div>
+        <div class="uk-width-1-2@m">
+            <h2>Visi dan Misi</h2>
+            <p>Taekwondo Garuda Club didirikan dengan visi untuk menjadi pusat pelatihan taekwondo terkemuka yang menghasilkan atlet-atlet berprestasi dengan karakter yang kuat dan mental yang tangguh. Kami berkomitmen untuk menyediakan lingkungan latihan yang suportif, profesional, dan inspiratif.</p>
+            <p>Misi kami adalah: <br>
+                1. Mengembangkan potensi atlet secara optimal. <br>
+                2. Menanamkan nilai-nilai disiplin, hormat, dan sportivitas. <br>
+                3. Memberikan pelatihan berkualitas tinggi oleh pelatih bersertifikasi.
+            </p>
+        </div>
+    </div>
+{% endblock %}

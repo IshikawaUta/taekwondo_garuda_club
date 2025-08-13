@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} - Taekwondo Garuda Club{% endblock %}
+{% block description %}{{ product.description | truncate(150, true) }}{% endblock %}
+{% block og_title %}{{ product.name }} - Garuda Taekwondo Club{% endblock %}
+{% block og_description %}{{ product.description | truncate(150, true) }}{% endblock %}
+{% block og_image %}{{ product.image_url }}{% endblock %}
+{% block og_url %}https://domain-anda.com/products/{{ product._id }}{% endblock %}
+
+{% block content %}
+    <div class="uk-grid-medium" uk-grid>
+        <div class="uk-width-1-2@m">
+            <img src="{{ product.get('image_url', url_for('static', filename='images/placeholder.jpg')) }}" alt="{{ product.name }}">
+        </div>
+        <div class="uk-width-1-2@m">
+            <h1>{{ product.name }}</h1>
+            <p class="uk-text-large uk-text-bold">Rp{{ product.price | format_rupiah }}</p>
+            <p>{{ product.description }}</p>
+            <form action="{{ url_for('add_to_cart', product_id=product._id) }}" method="post">
+                <button type="submit" class="uk-button uk-button-primary uk-width-1-1">Tambah ke Keranjang</button>
+            </form>
+
+            <h3 class="uk-heading-divider uk-margin-top">Ulasan Produk</h3>
+                {% if product.reviews %}
+                    <div class="uk-comment-list">
+                        {% for review in product.reviews %}
+                        <article class="uk-comment uk-card uk-card-default uk-card-body uk-margin-top">
+                            <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
+                                <div class="uk-width-expand">
+                                    <h4 class="uk-comment-title uk-margin-remove">{{ review.author }}</h4>
+                                    <p class="uk-comment-meta uk-margin-remove-top">
+                                        <span class="uk-rating">
+                                            {% for i in range(review.rating) %}
+                                            <span class="uk-rating-icon" uk-icon="icon: star"></span>
+                                            {% endfor %}
+                                        </span>
+                                        <a href="#">{{ review.date_posted.strftime('%d %B %Y') }}</a>
+                                    </p>
+                                </div>
+                            </header>
+                            <div class="uk-comment-body">
+                                <p>{{ review.comment }}</p>
+                            </div>
+                        </article>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>Belum ada ulasan untuk produk ini.</p>
+                {% endif %}
+
+            <h4 class="uk-margin-top">Berikan Ulasan Anda</h4>
+            <form action="{{ url_for('add_review', product_id=product._id) }}" method="post">
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" name="author" placeholder="Nama Anda" required>
+                </div>
+                <div class="uk-margin">
+                    <input class="uk-input" type="number" name="rating" placeholder="Rating (1-5)" min="1" max="5" required>
+                </div>
+                <div class="uk-margin">
+                    <textarea class="uk-textarea" name="comment" rows="5" placeholder="Komentar Anda" required></textarea>
+                </div>
+                <div class="uk-margin">
+                    <button class="uk-button uk-button-primary" type="submit">Kirim Ulasan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

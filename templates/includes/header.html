@@ -1,0 +1,50 @@
+<header class="uk-background-muted uk-box-shadow-small uk-position-top" uk-sticky="cls-active: uk-navbar-sticky">
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo" href="{{ url_for('index') }}" style="font-family: 'Bebas Neue'; font-weight: 400;">
+                Taekwondo Garuda Club
+            </a>
+        </div>
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav uk-visible@m">
+                <li><a href="{{ url_for('index') }}" style="font-family: 'Bebas Neue'; font-weight: 400;">Beranda</a></li>
+                <li><a href="{{ url_for('about') }}" style="font-family: 'Bebas Neue'; font-weight: 400;">Tentang Kami</a></li>
+                <li><a href="{{ url_for('products') }}" style="font-family: 'Bebas Neue'; font-weight: 400;">Produk</a></li>
+                <li><a href="{{ url_for('blog') }}" style="font-family: 'Bebas Neue'; font-weight: 400;">Blog</a></li>
+                <li><a href="{{ url_for('contact') }}" style="font-family: 'Bebas Neue'; font-weight: 400;">Kontak</a></li>
+            </ul>
+            <a href="{{ url_for('cart') }}" class="uk-navbar-item uk-button uk-button-text">
+                <span uk-icon="icon: cart" style="color: #fff;"></span>
+                <span class="uk-badge" style="background-color: #fff; color: #353535;">{{ session.cart|length if 'cart' in session else 0 }}</span>
+            </a>
+            <a href="#search-modal" uk-toggle class="uk-navbar-item uk-button uk-button-text">
+                <span uk-icon="icon: search" style="color: #fff;"></span>
+            </a>
+            <a class="uk-navbar-toggle uk-hidden@m" href="#offcanvas-nav" uk-toggle>
+                <span uk-navbar-toggle-icon></span>
+            </a>
+        </div>
+    </nav>
+</header>
+
+<div id="search-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <form class="uk-search uk-search-default uk-width-1-1" action="{{ url_for('products') }}" method="GET">
+            <span uk-search-icon></span>
+            <input class="uk-search-input" type="search" name="q" placeholder="Cari produk...">
+        </form>
+    </div>
+</div>
+
+<div id="offcanvas-nav" uk-offcanvas="overlay: true">
+    <div class="uk-offcanvas-bar">
+        <ul class="uk-nav uk-nav-default">
+            <li><a href="{{ url_for('index') }}">Beranda</a></li>
+            <li><a href="{{ url_for('about') }}">Tentang Kami</a></li>
+            <li><a href="{{ url_for('products') }}">Produk</a></li>
+            <li><a href="{{ url_for('blog') }}">Blog</a></li>
+            <li><a href="{{ url_for('contact') }}">Kontak</a></li>
+        </ul>
+    </div>
+</div>

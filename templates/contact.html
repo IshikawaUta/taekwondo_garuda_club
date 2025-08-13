@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Kontak - Taekwondo Garuda Club{% endblock %}
+
+{% block content %}
+    <h1 class="uk-text-center">Hubungi Kami</h1>
+    <div class="uk-grid-medium" uk-grid>
+        <div class="uk-width-1-2@m">
+            <h2>Kirim Pesan</h2>
+            <form action="{{ url_for('contact') }}" method="post">
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" name="name" placeholder="Nama Anda" required>
+                </div>
+                <div class="uk-margin">
+                    <input class="uk-input" type="email" name="email" placeholder="Email Anda" required>
+                </div>
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" name="subject" placeholder="Subjek" required>
+                </div>
+                <div class="uk-margin">
+                    <textarea class="uk-textarea" name="message" rows="5" placeholder="Pesan" required></textarea>
+                </div>
+                <div class="uk-margin">
+                    <button class="uk-button uk-button-primary" type="submit">Kirim Pesan</button>
+                </div>
+            </form>
+        </div>
+        <div class="uk-width-1-2@m">
+            <h2>Informasi Kontak</h2>
+            <p><span uk-icon="icon: location"></span> Jl. Pejuang Raya No. 123, Bekasi, Indonesia</p>
+            <p><span uk-icon="icon: phone"></span> (021) 1234 5678</p>
+            <p><span uk-icon="icon: mail"></span> info@garudataekwondo.com</p>
+            <div id="map-container" style="height: 300px; width: 100%;">
+                </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Kelola Produk{% endblock %}
+
+{% block content %}
+    <h1 class="uk-text-center">Kelola Produk</h1>
+    
+    <div class="uk-card uk-card-default uk-card-body uk-margin-medium">
+        <h3 class="uk-card-title">Tambah Produk Baru</h3>
+        <form action="{{ url_for('admin_products') }}" method="post" enctype="multipart/form-data">
+            <div class="uk-margin">
+                <input class="uk-input" type="text" name="name" placeholder="Nama Produk" required>
+            </div>
+            <div class="uk-margin">
+                <input class="uk-input" type="number" name="price" placeholder="Harga" required>
+            </div>
+            <div class="uk-margin">
+                <textarea class="uk-textarea" name="description" rows="5" placeholder="Deskripsi Produk" required></textarea>
+            </div>
+            <div class="uk-margin" uk-form-custom="target: true">
+                <input type="file" name="image" required>
+                <input class="uk-input uk-form-width-medium" type="text" placeholder="Pilih Gambar Produk" disabled>
+            </div>
+            <div class="uk-margin">
+                <button class="uk-button uk-button-primary" type="submit">Tambah Produk</button>
+            </div>
+        </form>
+    </div>
+
+    <hr class="uk-divider-small">
+
+    <h3 class="uk-margin-top">Daftar Produk</h3>
+    <table class="uk-table uk-table-striped uk-table-hover uk-table-middle">
+        <thead>
+            <tr>
+                <th>Gambar</th>
+                <th>Nama Produk</th>
+                <th>Harga</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td><img src="{{ product.get('image_url', url_for('static', filename='images/placeholder.jpg')) }}" alt="{{ product.name }}" width="60"></td>
+                <td>{{ product.name }}</td>
+                <td>Rp{{ product.price | format_rupiah }}</td>
+                <td>
+                    <a href="#" class="uk-button uk-button-small uk-button-default">Edit</a>
+                    <form action="{{ url_for('admin_delete_product', product_id=product._id) }}" method="post" class="uk-display-inline">
+                        <button type="submit" class="uk-button uk-button-small uk-button-danger">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

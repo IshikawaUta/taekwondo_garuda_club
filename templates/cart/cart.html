@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Keranjang Belanja - Taekwondo Garuda Club{% endblock %}
+
+{% block content %}
+    <h1 class="uk-text-center">Keranjang Belanja</h1>
+    {% if session.cart %}
+    <div class="uk-card uk-card-default uk-card-body">
+        <table class="uk-table uk-table-striped uk-table-hover uk-table-middle uk-text-center">
+            <thead>
+                <tr>
+                    <th>Gambar</th>
+                    <th>Nama Produk</th>
+                    <th>Harga</th>
+                    <th>Jumlah</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in session.cart %}
+                <tr>
+                    <td><img src="{{ item.image_url }}" alt="{{ item.name }}" width="60"></td>
+                    <td>{{ item.name }}</td>
+                    <td>Rp{{ item.price | format_rupiah }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>Rp{{ (item.price * item.quantity) | format_rupiah }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="uk-text-right">
+            <h3>Total: Rp{{ cart_total | format_rupiah }}</h3>
+            <form action="{{ url_for('checkout') }}" method="post">
+                <button type="submit" class="uk-button uk-button-primary uk-margin-small-top">Checkout via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+    {% else %}
+    <div class="uk-alert-warning" uk-alert>
+        <p>Keranjang belanja Anda kosong.</p>
+        <p><a href="{{ url_for('products') }}">Mulai belanja sekarang!</a></p>
+    </div>
+    {% endif %}
+{% endblock %}

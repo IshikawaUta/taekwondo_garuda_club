@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard Admin{% endblock %}
+
+{% block content %}
+    <h1 class="uk-text-center">Dashboard Admin</h1>
+    <p>Selamat datang, {{ current_user.username }}!</p>
+    <div class="uk-child-width-1-2@m uk-grid-match" uk-grid>
+        <div>
+            <div class="uk-card uk-card-default uk-card-hover uk-card-body uk-text-center">
+                <h3 class="uk-card-title">Manajemen Produk</h3>
+                <p>Kelola produk yang dijual di toko.</p>
+                <a href="{{ url_for('admin_products') }}" class="uk-button uk-button-primary">Kelola Produk</a>
+            </div>
+        </div>
+        <div>
+            <div class="uk-card uk-card-default uk-card-hover uk-card-body uk-text-center">
+                <h3 class="uk-card-title">Manajemen Blog</h3>
+                <p>Kelola postingan blog dan artikel.</p>
+                <a href="{{ url_for('admin_blog') }}" class="uk-button uk-button-primary">Kelola Blog</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

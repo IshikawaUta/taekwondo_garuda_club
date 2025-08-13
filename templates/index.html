@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Beranda - Taekwondo Garuda Club{% endblock %}
+
+{% block content %}
+    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider="autoplay: true; autoplay-interval: 5000">
+        <ul class="uk-slider-items uk-child-width-1-1">
+            <li>
+                <div class="uk-cover-container">
+                    <img src="{{ url_for('static', filename='images/banner1.jpg') }}" alt="" uk-cover>
+                    <div class="uk-overlay uk-position-cover uk-flex uk-flex-center uk-flex-middle">
+                        <h2 class="uk-text-center">Taekwondo Garuda Club</h2>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="uk-cover-container">
+                    <img src="{{ url_for('static', filename='images/banner2.jpg') }}" alt="" uk-cover>
+                    <div class="uk-overlay uk-position-cover uk-flex uk-flex-center uk-flex-middle">
+                        <h2 class="uk-text-center">Taekwondo Garuda Club</h2>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+    </div>
+
+    <div class="uk-section">
+        <h2 class="uk-text-center">Produk Unggulan</h2>
+        <div class="uk-child-width-1-2 uk-child-width-1-4@s uk-grid-match" uk-grid>
+            {% for product in products %}
+            <div>
+                <div class="uk-card uk-card-default uk-card-hover uk-card-body uk-text-center">
+                    <a href="{{ url_for('product_detail', product_id=product._id) }}">
+                        <img src="{{ product.get('image_url', url_for('static', filename='images/placeholder.jpg')) }}" alt="{{ product.name }}" class="uk-animation-fade" style="height: 200px; object-fit: cover;">
+                        <h3 class="uk-card-title uk-margin-top">{{ product.name }}</h3>
+                        <p>Rp{{ product.price | format_rupiah }}</p>
+                    </a>
+                    <form action="{{ url_for('add_to_cart', product_id=product._id) }}" method="post">
+                        <button type="submit" class="uk-button uk-button-primary">Beli Sekarang</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

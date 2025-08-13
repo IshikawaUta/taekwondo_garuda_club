@@ -1,0 +1,88 @@
+body {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    color: #333;
+}
+
+h1 {
+    font-family: 'Bebas Neue';
+    font-weight: 400;
+}
+
+h2 {
+    font-family: 'Bebas Neue';
+    font-weight: 400;
+}
+
+h3 {
+    font-family: 'Bebas Neue';
+    font-weight: 400;
+}
+
+h4 {
+    font-family: 'Bebas Neue';
+    font-weight: 400;
+}
+
+.uk-logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+.uk-navbar-nav > li > a {
+    text-transform: capitalize;
+    font-weight: 500;
+    background-color: #0077ff;
+    color: #fff;
+}
+
+.uk-navbar-container {
+    background-color: #0077ff !important;
+}
+
+.uk-button-primary {
+    background-color: #d11a2a; /* Warna merah taekwondo */
+    color: #fff;
+}
+
+.uk-button-primary:hover {
+    background-color: #b1131e;
+}
+
+.uk-card-hover:hover {
+    box-shadow: 0 14px 25px rgba(0, 0, 0, 0.16);
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+}
+
+/* Animasi untuk gambar */
+.uk-animation-fade {
+    animation-duration: 0.5s;
+    animation-delay: 0.2s;
+}
+
+.uk-cover-container {
+    height: 500px;
+}
+
+.uk-section-secondary {
+    background-color: #0077ff;
+}
+
+/* Media query untuk tampilan mobile */
+@media (max-width: 640px) {
+    /* Menjadikan setiap card mengambil 100% lebar grid */
+    .uk-grid > div {
+        width: 100% !important;
+    }
+
+    /* Memastikan tombol "Beli Sekarang" memiliki jarak yang cukup */
+    .uk-card-body form {
+        margin-top: 20px;
+    }
+
+    .uk-cover-container {
+        height: 400px !important;
+    }
+}

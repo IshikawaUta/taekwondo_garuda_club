@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Login Admin{% endblock %}
+
+{% block content %}
+    <div class="uk-flex uk-flex-center">
+        <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+            <h1 class="uk-text-center">Login Admin</h1>
+            <form action="{{ url_for('admin_login') }}" method="post">
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" name="username" placeholder="Username" required>
+                </div>
+                <div class="uk-margin">
+                    <input class="uk-input" type="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="uk-margin">
+                    <button class="uk-button uk-button-primary uk-width-1-1" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
