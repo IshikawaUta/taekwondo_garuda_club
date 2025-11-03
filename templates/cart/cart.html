@@ -6,6 +6,7 @@
     <h1 class="uk-text-center">Keranjang Belanja</h1>
     {% if session.cart %}
     <div class="uk-card uk-card-default uk-card-body">
+        <div class="uk-overflow-auto">
         <table class="uk-table uk-table-striped uk-table-hover uk-table-middle uk-text-center">
             <thead>
                 <tr>
@@ -28,6 +29,7 @@
                 {% endfor %}
             </tbody>
         </table>
+        </div>
         <div class="uk-text-right">
             <h3>Total: Rp{{ cart_total | format_rupiah }}</h3>
             <form action="{{ url_for('checkout') }}" method="post">
